@@ -1,7 +1,6 @@
 //react imports
-import React, {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 
 //Slice imports
 import { fetchCarDetail } from '../Slice/carDetailSlice';
@@ -13,35 +12,51 @@ import { useAppDispatch, useAppSelector } from '../HookTypes/HookTypes';
 import { Container } from '@mui/system';
 
 const Search = () => {
+	
 
-  const {state} = useLocation();
+	const location = useLocation();
 
-  const dispatch = useAppDispatch();
+	console.log('loaction',location);
 
-  const carDetails = useAppSelector( state => state.carDetails)
-  // console.log(state)
+	const state = location.state as any // coz type is unknown
 
-  const [searchCarResult, setsearchCarResult] = useState([])
+	console.log('state',typeof state);
 
-  useEffect(() => {
 
-		dispatch(fetchCarDetail())
-    
-  },[])
-  
+	const dispatch = useAppDispatch();
 
-  useEffect(() => {
+	const carDetails = useAppSelector((state) => state.carDetails);
+	console.log(carDetails);
 
-	const searchCarResult = carDetails.carDetail.filter( details => Object.values(details).join('').toLowerCase().includes(state.toLowerCase()))
-	// console.log(searchCarResult)
-	setsearchCarResult(searchCarResult);
-  }, [state])
-  
+	type carDetail = {
+		id: string;
+		model: string;
+		year: string;
+		company: string;
+		auctionEndTime: string;
+	};
 
-  return (
-    <Container component="main" maxWidth="lg">
-        <div className="row">
-				{searchCarResult.map((details) => (
+	const [ searchCarResult, setsearchCarResult ] = useState([] as carDetail[]);
+
+	useEffect(() => {
+		dispatch(fetchCarDetail());
+	}, []);
+
+	useEffect(
+		() => {
+			const searchCarResult = carDetails.carDetail.filter((details) =>
+				Object.values(details).join('').toLowerCase().includes(state.toLowerCase())
+			);
+			console.log('searchSearch', searchCarResult);
+			setsearchCarResult(searchCarResult);
+		},
+		[ state ]
+	);
+
+	return (
+		<Container component="main" maxWidth="lg">
+			<div className="row">
+				{searchCarResult.map((details: carDetail) => (
 					<div className="col-lg-4 col-sm-6 col-xs-12" key={details.id}>
 						<div className="">
 							<div className="">
@@ -62,9 +77,8 @@ const Search = () => {
 					</div>
 				))}
 			</div>
-    </Container>
-    
-  )
-}
+		</Container>
+	);
+};
 
-export default Search
+export default Search;

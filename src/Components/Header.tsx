@@ -1,11 +1,13 @@
 //React imports
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
 //third-party-imports
 import axios from "axios";
+
+//api imports
+import { JSON_API } from '../API/CarApi';
 
 //hookType Imports
 import { useAppSelector } from '../HookTypes/HookTypes';
@@ -25,9 +27,9 @@ const Header = () => {
 
 	const companys = new Set();
 
-	const [ company, setcompany ] = useState([ ...companys ]);
+	const [ company, setcompany ] = useState([ ...companys ] as string[]);
 
-	const [searchMenu, setsearchMenu] = useState([]);
+	const [searchMenu, setsearchMenu] = useState([] as string[]);
 
 	const user = useAppSelector( state => state.user)
 
@@ -41,9 +43,9 @@ const Header = () => {
 	useEffect(
 		() => {
 
-			axios.get(`${process.env.REACT_APP_JSON_API}cardetails`).then((res) => {
-				res.data.map((details) => companys.add(details.company));
-				setcompany([ ...companys ]);
+			axios.get(`${JSON_API}cardetails`).then((res) => {
+				res.data.map((details: { company: string; }) => companys.add(details.company));
+				setcompany([ ...companys ] as string[]);
 			});
 
 		
@@ -55,9 +57,9 @@ const Header = () => {
 	);
 
 
-	const handleSearch = (e) =>{
+	const handleSearch = (event:any) =>{
 
-		const search = e.target.value;
+		const search = event.target.value;
 
 		const searchResult = company.filter((items) => items.includes(search.toUpperCase()));
 		setsearchMenu(searchResult)
@@ -67,9 +69,9 @@ const Header = () => {
 		
 	}
 
-	const handleMenu = (e) => {
+	const handleMenu = (event: any) => {
 
-		const seletectedMenu = e.target.getAttribute('data')
+		const seletectedMenu = event.target.getAttribute('data-details')
 
 		navigate('/search', {state:seletectedMenu});
 		setsearchMenu([]);
@@ -98,7 +100,7 @@ const Header = () => {
 				{searchMenu.length ? 
 					<div className="nav-search-abs" aria-labelledby="navbarDropdownMenuLink">
 					{searchMenu.map((details) => (
-						<a className="dropdown-item" data={details} onClick={handleMenu} key={details}>
+						<a className="dropdown-item" data-details = {details} onClick={handleMenu} key={details}>
 							{details}
 						</a>
 					))}

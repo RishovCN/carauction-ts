@@ -1,17 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer/dist/internal";
 
-type UserDetails = {
-    email: string,
-    fullName: string
-}
 
 type InitialState = {
-    message: string,
-    token: string,
-    userDetails: UserDetails
-    
+        message: string;
+        token: string;
+        userDetails: {
+            email: string;
+            fullName: string;
+    }
 }
-const initialState: InitialState = {
+const initialState: WritableDraft<InitialState> = {
         message: '',
         token: '',
         userDetails: {
@@ -25,10 +24,10 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.message = action.payload.message
-            state.token = action.payload.token
-            state.userDetails.email = action.payload.userDetails.email
-            state.userDetails.fullName = action.payload.userDetails.fullName
+                state.message = action.payload.message
+                state.token = action.payload.token
+                state.userDetails.email = action.payload.userDetails.email
+                state.userDetails.fullName = action.payload.userDetails.fullName
            
         }
     }

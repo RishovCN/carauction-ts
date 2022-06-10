@@ -1,5 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 
+//API imports
+import { JSON_API } from "../API/CarApi";
+
 import axios from "axios";
 
 
@@ -19,10 +22,10 @@ const initialState: InitialState  = {
 
 //generate pending, fulfilled and rejected action types
 
-export const fetchCarDetail = createAsyncThunk('carDetail/fetchCarDetail', () => {
-return axios
-        .get(`${process.env.REACT_APP_JSON_API}cardetails`)
-        .then( res => res.data)
+export const fetchCarDetail = createAsyncThunk('carDetail/fetchCarDetail', async () => {
+    const res = await axios
+        .get(`${JSON_API}cardetails`);
+    return res.data;
 })
 
 

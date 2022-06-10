@@ -1,0 +1,42 @@
+{
+  "cardetails": [
+    {
+      "id": 1,
+      "model": "x10",
+      "company": "BMW",
+      "year": "2017",
+      "auctionEndTime": "2022-05-24"
+    },
+    {
+      "model": "X5",
+      "company": "BMW",
+      "year": "2018",
+      "auctionEndTime": "2022-05-24",
+      "id": 2
+    },
+    {
+      "model": "DB11",
+      "company": "ASTON MARTIN",
+      "year": "2019",
+      "auctionEndTime": "2022-05-24",
+      "image": "C:\\fakepath\\1636938537350.jpg",
+      "id": 3
+    },
+    {
+      "model": "XK120",
+      "company": "JAGUAR",
+      "year": "1954",
+      "auctionEndTime": "2022-05-24",
+      "image": "C:\\fakepath\\1643065079284.jpg",
+      "id": 4
+    },
+    {
+      "model": "XK120",
+      "company": "BMW",
+      "year": "2019",
+      "auctionEndTime": "2022-05-24",
+      "image": "C:\\fakepath\\1644936606685.jpg",
+      "id": 5
+    }
+  ]
+}

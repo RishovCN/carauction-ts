@@ -31,6 +31,8 @@ const SubmitVehical = () => {
 		axios.post('http://localhost:3001/cardetails', payload).then((res) => console.log(res));
 	};
 
+	
+
 	return (
 		<Container component="main" maxWidth="lg">
 			<div className="colHead">
@@ -60,7 +62,7 @@ const SubmitVehical = () => {
 								id="validationDefault01"
 								placeholder="Model"
 								name="model"
-								onChange={(e) => setmodel(e.target.value)}
+								onChange={(event) => setmodel(event.target.value.toLocaleUpperCase)}
 								required
 							/>
 						</div>

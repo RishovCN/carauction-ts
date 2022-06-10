@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 //third party imports
 import axios, { AxiosResponse } from 'axios';
 
+//api imports
+import { CAR_AUCTION_HEROKU_API } from '../API/CarApi';
+
 //MUI imports
 import Button from '@mui/material/Button';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
@@ -49,7 +52,7 @@ export default function SignIn() {
 
 		 	
 		  axios.post<User>(
-			`${process.env.REACT_APP_CAR_AUCTION_HEROKU_API}registerProfile`,
+			`${CAR_AUCTION_HEROKU_API}registerProfile`,
 			userRegistration
 		  ).then( () => {
 			setuserRegistration(user),

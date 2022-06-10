@@ -1,12 +1,12 @@
 //react imports
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
 
 //Slice imports
 import { fetchCarDetail } from '../Slice/carDetailSlice';
 
 //hookType Imports
-import { useAppDispatch,useAppSelector } from '../HookTypes/HookTypes';
+import { useAppDispatch, useAppSelector } from '../HookTypes/HookTypes';
 
 //Css imports
 import '../App.css';
@@ -14,21 +14,29 @@ import '../App.css';
 //MUI imports
 import Container from '@mui/material/Container';
 
-
 const Collections = () => {
-	
+	type CarDetail = {
+		id: string;
+		model: string;
+		year: string;
+		company: string;
+		auctionEndTime: string;
+	};
+
+
 	const companys = new Set();
 
 	const dispatch = useAppDispatch();
 
 	const carDetail = useAppSelector((state) => state.carDetails);
 
-	console.log(carDetail);
+	const [ company, setcompany ] = useState<string[]>([ ...companys ] as string[]);
 
-	const [ company, setcompany ] = useState([ ...companys ]);
-	const [ searchResult, setsearchResult ] = useState([ ...companys ]);
-	const [ carDetails, setcarDetails ] = useState([]);
-	const [ filterCarDetails, setfilterCarDetails ] = useState([]);
+	const [ searchResult, setsearchResult ] = useState([ ...companys ] as string[]);
+
+	const [ carDetails, setcarDetails ] = useState([] as CarDetail[]);
+
+	const [ filterCarDetails, setfilterCarDetails ] = useState<CarDetail[]>([]);
 
 	useEffect(() => {
 		dispatch(fetchCarDetail());
@@ -36,25 +44,25 @@ const Collections = () => {
 
 	useEffect(
 		() => {
-			
 			setfilterCarDetails(carDetail.carDetail);
 
 			setcarDetails(carDetail.carDetail);
 
-			console.log('filter', filterCarDetails)
+			console.log('filter', filterCarDetails);
 
 			carDetail.carDetail.map((details) => companys.add(details.company));
 
-			setcompany([ ...companys ]);
+			setcompany([ ...companys ] as string[]);
 
-			setsearchResult([ ...companys ]);
-
-		}, [ carDetail ]);
+			setsearchResult([ ...companys ] as string[]);
+		},
+		[ carDetail ]
+	);
 
 	console.log('filter', filterCarDetails);
 
-	const searchDropdown = (e) => {
-		const search = e.target.value;
+	const searchDropdown = (event: any) => {
+		const search = event.target.value;
 
 		const searchResult = company.filter((items) => items.includes(search.toUpperCase()));
 		setsearchResult(searchResult);
@@ -63,12 +71,15 @@ const Collections = () => {
 		}
 	};
 
-	const handleMenu = (e) => {
-		console.log(e.target.getAttribute('data'))
-		const search = e.target.getAttribute('data')
-		const searchResult = carDetails.filter( details => Object.values(details).join('').toLowerCase().includes(search.toLowerCase()))
-		setfilterCarDetails(searchResult)
-		console.log('car',searchResult)
+	const handleMenu = (event:any) => {
+		// need to study
+		console.log(event.name);
+		const search = event.target.dataset.details;
+		const searchResult = carDetails.filter((details) =>
+			Object.values(details).join('').toLowerCase().includes(search.toLowerCase())
+		);
+		setfilterCarDetails(searchResult);
+		console.log('car', searchResult);
 	};
 
 	const handleReset = () => {
@@ -122,7 +133,12 @@ const Collections = () => {
 										onKeyUp={searchDropdown}
 									/>
 									{searchResult.map((details) => (
-										<a className="dropdown-item" data={details} onClick={handleMenu} key={details}>
+										<a
+											className="dropdown-item"
+											data-details={details}
+											onClick={handleMenu}
+											key={details}
+										>
 											{details}
 										</a>
 									))}
@@ -131,7 +147,7 @@ const Collections = () => {
 							<li className="nav-item dropdown">
 								<a
 									className="nav-link"
-									data="reset"
+									data-details="reset"
 									data-toggle="dropdown"
 									aria-haspopup="true"
 									aria-expanded="false"

@@ -43,6 +43,7 @@ export default function SignIn() {
 	let dispatch = useAppDispatch()
 
 	const handleInput = (event: { target: { name: string; value: string; }; }) => {
+
 		const name = event.target.name;
 		const value = event.target.value;
 
@@ -61,7 +62,7 @@ export default function SignIn() {
 			  sessionStorage.setItem('token',res.data.token)
 			  dispatch(setUser(res.data))
 			  navigate('/collections')
-			//   console.log( res)
+			  console.log('signIN',res)
 			
 		  })
 		  .catch( err => console.log(err))

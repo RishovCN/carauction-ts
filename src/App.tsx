@@ -1,5 +1,5 @@
 //react library imports
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router';
 
