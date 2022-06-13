@@ -17,7 +17,7 @@ const initialState: InitialState  = {
     loading: false,
     carDetail: [],
     error: '',
-}
+} 
 
 
 //generate pending, fulfilled and rejected action types

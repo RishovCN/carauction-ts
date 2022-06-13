@@ -38,7 +38,7 @@ const SubmitVehical = () => {
 			<div className="colHead">
 				<h2>Submit your Vehicle</h2>
 				<p>
-					Collector Chassis is a social platform for enthusiasts, hobbyists and collectors to showcase to
+					car auctions is a social platform for enthusiasts, hobbyists and collectors to showcase to
 					showcase, spectate, buy and sell vintage, classic and special interest vehicles.
 				</p>
 

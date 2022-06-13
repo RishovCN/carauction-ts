@@ -80,10 +80,10 @@ export default function SignIn() {
 				}}
 			>
 				<Typography component="h1" variant="h3" >
-					Sign in to Collector Chassis
+					Sign in to car auction
 				</Typography>
 				<Typography>
-					No Collector chassis account yet?
+					No car auction account yet?
 					<Link href="/signUp" variant="body2" sx={{ textDecoration: 'none', color: '#b3916b' }}>
 						{'Create an account'}
 					</Link>
