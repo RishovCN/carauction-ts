@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import  userReducer  from "../Slice/userSlice";
-import carDetailsReducer from "../Slice/carDetailSlice";
+import  userReducer  from "../Slice/User/userSlice";
+import carDetailsReducer from "../Slice/Cardetails/carDetailSlice";
 
 const store = configureStore({
     reducer: {

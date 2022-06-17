@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
 //slice imports
-import { setUser } from '../Slice/userSlice';
+import { setUser } from '../Slice/User/userSlice';
 
 import { useAppDispatch, useAppSelector } from '../HookTypes/HookTypes';
 

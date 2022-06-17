@@ -1,34 +1,17 @@
-import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
+//RTK imports
+import { createSlice } from "@reduxjs/toolkit";
+//In app imports
+import { fetchCarDetail } from './carDetailApi'
 
-//API imports
-import { JSON_API } from "../API/CarApi";
+//type imports
+import { InitialState } from "./carDetailTypes";
 
-import axios from "axios";
-
-
-
-type InitialState = {
-    loading: boolean,
-    carDetail:any[],
-    error: string
-
-}
-const initialState: InitialState  = {
+    const initialState: InitialState  = {
     loading: false,
-    carDetail: [],
+    carDetail:[] ,
     error: '',
-} 
-
-
-//generate pending, fulfilled and rejected action types
-
-export const fetchCarDetail = createAsyncThunk('carDetail/fetchCarDetail', async () => {
-    const res = await axios
-        .get(`${JSON_API}cardetails`);
-    return res.data;
-})
-
-
+  } 
+  
 const carDetailSlice = createSlice({
     name: 'carDetail',
     initialState,

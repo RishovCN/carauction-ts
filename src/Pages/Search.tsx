@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
 //Slice imports
-import { fetchCarDetail } from '../Slice/carDetailSlice';
+import { fetchCarDetail } from '../Slice/Cardetails/carDetailApi';
 
 //hookType imports
 import { useAppDispatch, useAppSelector } from '../HookTypes/HookTypes';

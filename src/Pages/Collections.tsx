@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 
 //Slice imports
-import { fetchCarDetail } from '../Slice/carDetailSlice';
+import { fetchCarDetail } from '../Slice/Cardetails/carDetailApi';
 
 //hookType Imports
 import { useAppDispatch, useAppSelector } from '../HookTypes/HookTypes';
@@ -14,14 +14,12 @@ import '../App.css';
 //MUI imports
 import Container from '@mui/material/Container';
 
+//types import 
+import { CarDetail } from './Types';
+
 const Collections = () => {
-	type CarDetail = {
-		id: string;
-		model: string;
-		year: string;
-		company: string;
-		auctionEndTime: string;
-	};
+
+	
 
 
 	const companys = new Set();
@@ -32,7 +30,7 @@ const Collections = () => {
 
 	const [ company, setcompany ] = useState<string[]>([ ...companys ] as string[]);
 
-	const [ searchResult, setsearchResult ] = useState([ ...companys ] as string[]);
+	const [ searchResult, setsearchResult ] = useState<string[]>([ ...companys ] as string[]);
 
 	const [ carDetails, setcarDetails ] = useState([] as CarDetail[]);
 
@@ -50,7 +48,7 @@ const Collections = () => {
 
 			console.log('filter', filterCarDetails);
 
-			carDetail.carDetail.map((details) => companys.add(details.company));
+			carDetail.carDetail.map((details) => companys.add(details.company)); //cardetail type
 
 			setcompany([ ...companys ] as string[]);
 
@@ -61,8 +59,8 @@ const Collections = () => {
 
 	console.log('filter', filterCarDetails);
 
-	const searchDropdown = (event: any) => {
-		const search = event.target.value;
+	const searchDropdown = (event: React.FormEvent<HTMLInputElement>) => {
+		const search = event.currentTarget.value
 
 		const searchResult = company.filter((items) => items.includes(search.toUpperCase()));
 		setsearchResult(searchResult);
